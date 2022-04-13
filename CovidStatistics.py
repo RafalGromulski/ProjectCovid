@@ -65,23 +65,32 @@ def covid(country=None):
     ), axis="columns")
 
 
-# poland = covid("Poland")
-# print(poland)
-#
-# spain = covid("Spain")
-# print(spain)
-#
-# sweden = covid("Sweden")
-# print(sweden)
-#
-# italy = covid("Italy")
-# print(italy)
-#
-# world = covid()
-# print(world)
+def covid_fatality_plot(data):
+    fatality_rate = data["Deaths"] / data["Confirmed"]
+    fatality_percent = fatality_rate * 100
+    fatality_percent.plot(kind="line",
+                          title="Percent of deaths vs new cases of Covid",
+                          xlabel="Day",
+                          ylabel="Percent",
+                          figsize=(7, 7),
+                          grid=True)
+    plt.show()
+
 
 # poland[["Confirmed", "Deaths"]].plot(kind="line",
 #                                      subplots=True,
 #                                      layout=(2, 1),
 #                                      figsize=(5, 7))
 # plt.show()
+
+if __name__ == "__main__":
+    poland = covid("Poland")
+    covid_fatality_plot(poland)
+
+    # spain = covid("Spain")
+    # sweden = covid("Sweden")
+    # italy = covid("Italy")
+    # world = covid()
+
+    # country_statistics = input("Enter the name of country: ")
+    # covid_fatality_plot(covid(country_statistics))
