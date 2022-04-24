@@ -77,11 +77,35 @@ def covid_fatality_plot(data):
     plt.show()
 
 
-# poland[["Confirmed", "Deaths"]].plot(kind="line",
-#                                      subplots=True,
-#                                      layout=(2, 1),
-#                                      figsize=(5, 7))
-# plt.show()
+def confirmed_daily_increase_plot(data):
+    data["Confirmed"].diff().plot(kind="line",
+                                  title="Daily increase of confirmed cases",
+                                  xlabel="Day",
+                                  ylabel="Confirmed cases",
+                                  figsize=(7, 7),
+                                  grid=True)
+    plt.show()
+
+
+def deaths_monthly_plot(data):
+    data["Deaths"].diff().resample("M").sum().plot(kind="line",
+                                                   title="Monthly increase of deaths",
+                                                   xlabel="Day",
+                                                   ylabel="Deaths",
+                                                   figsize=(7, 7),
+                                                   grid=True)
+    plt.show()
+
+
+def deaths_last_period_plot(data, period):
+    data["Deaths"].last(period).diff().plot(kind="line",
+                                            title="Increase of deaths in selected period to today",
+                                            xlabel="Day",
+                                            ylabel="Deaths",
+                                            figsize=(7, 7),
+                                            grid=True)
+    plt.show()
+
 
 if __name__ == "__main__":
     poland = covid("Poland")
@@ -91,6 +115,7 @@ if __name__ == "__main__":
     world = covid()
 
     covid_fatality_plot(poland)
-
-
-
+    deaths_monthly_plot(spain)
+    confirmed_daily_increase_plot(sweden)
+    deaths_last_period_plot(italy, "M")  # last month
+    deaths_last_period_plot(world, "3W")  # last three weeks
