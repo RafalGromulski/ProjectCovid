@@ -25,7 +25,7 @@ def _get_info(country, data, category):
     Name: 2022-02-28 00:00:00, dtype: Int64
 
     >>> _get_info(None, deaths_covid, "Deaths").loc["2022-01-06"]
-    Deaths    5473352
+    Deaths    5473369
     Name: 2022-01-06 00:00:00, dtype: Int64
     """
     if country is not None:
@@ -53,8 +53,8 @@ def covid(country=None):
     Name: 2022-02-01 00:00:00, dtype: Int64
 
     >>> covid().loc["2022-01-01"]
-    Confirmed    289928499
-    Deaths         5440821
+    Confirmed    289928718
+    Deaths         5440837
     Recovered            0
     Name: 2022-01-01 00:00:00, dtype: Int64
     """
@@ -85,12 +85,12 @@ def covid_fatality_plot(data):
 
 if __name__ == "__main__":
     poland = covid("Poland")
+    spain = covid("Spain")
+    sweden = covid("Sweden")
+    italy = covid("Italy")
+    world = covid()
+
     covid_fatality_plot(poland)
 
-    # spain = covid("Spain")
-    # sweden = covid("Sweden")
-    # italy = covid("Italy")
-    # world = covid()
 
-    # country_statistics = input("Enter the name of country: ")
-    # covid_fatality_plot(covid(country_statistics))
+
